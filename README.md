@@ -38,7 +38,10 @@ To run this project locally, follow these steps:
 
 1. Navigate to the `frontend` directory.
 2. Install dependencies: `npm install` or `yarn install`.
-3. Start the React development server: `npm start` or `yarn start`.
+3. Add these two environment variables:
+    - REACT_APP_API_URL = "http://127.0.0.1:8000"
+    - REACT_APP_ALPHA_VANTAGE_API_KEY = <YOUR_APLHA_VANTAGE_API_KEY>
+4. Start the React development server: `npm start` or `yarn start`.
 
 ## Usage
 
