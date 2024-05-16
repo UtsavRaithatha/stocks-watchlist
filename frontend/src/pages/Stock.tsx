@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 import {
   LineChart,
   XAxis,
@@ -37,14 +38,16 @@ const Stock: React.FC = () => {
   const [chartData, setChartData] = useState<any[]>([]);
   const [chartDate, setChartDate] = useState<string>("");
 
+  const { symbol } = useParams<{ symbol: string }>();
+
   useEffect(() => {
-    getStockData("IBM");
-  }, []);
+    getStockData(symbol ?? "");
+  }, [symbol]);
 
   const getStockData = async (symbol: string) => {
     try {
       const response = await axios.get<StockData>(
-        `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&apikey=demo`
+        `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&apikey=${process.env.REACT_APP_ALPHA_VANTAGE_API_KEY}`
       );
       prepareChartData(response.data);
     } catch (error) {

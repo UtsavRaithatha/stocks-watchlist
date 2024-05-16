@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import axios from "axios";
-import { AutocompleteRenderOptionState } from "@mui/material/Autocomplete/Autocomplete";
 
 interface Stock {
   "1. symbol": string;
@@ -31,7 +30,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ addToWatchlist }) => {
     setInputValue(newInputValue);
     try {
       const response = await axios.get(
-        `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=tesco&apikey=${process.env.REACT_APP_ALPHA_VANTAGE_API_KEY}`
+        `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${newInputValue}&apikey=${process.env.REACT_APP_ALPHA_VANTAGE_API_KEY}`
       );
       setOptions(response.data.bestMatches || []);
       console.log(response.data.bestMatches);
